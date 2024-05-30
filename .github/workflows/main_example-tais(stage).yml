@@ -46,13 +46,6 @@ jobs:
         with:
           name: java-app
       
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_EE3020ACA2BC40DC88C568123848BFB9 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_40FD8A93E00E497EB0B84D129C1FD493 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_2AF79BE6A38F46ACA44807812B67CFC3 }}
-
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
@@ -60,4 +53,5 @@ jobs:
           app-name: 'example-tais'
           slot-name: 'stage'
           package: '*.jar'
+          publish-profile: ${{ secrets.APP_SERVICE_PROFILE }}
           
